@@ -25,4 +25,7 @@ The outer playbook controls the execution of these tasks over multiple calls.
 * port_delay: How long to wait before listening for the service port after a restart.
 
 # Usage
+
+```
 ansible-playbook -l cassandra -i inventory service_restarter.yml
+```
