@@ -16,7 +16,7 @@ The outer playbook controls the execution of these tasks over multiple calls.
 
 # Variables
 
-* service_name: The service to be restarted.
+* service_name: The service to be stopped & started.
 * 1st_interval: The 1st interval after the service has been stopped.
 * service_port: The service port that will be checked when the service is restarted.
 * wait_for_timeout: How long we will wait for the service port to start responding.
