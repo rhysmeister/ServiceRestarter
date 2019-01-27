@@ -1,0 +1,46 @@
+---
+# Tasks file for ServiceRestarter
+- name: Select random host from play_hosts
+  set_fact:
+    random_host: "{{ play_hosts | random }}"
+  run_once: yes
+
+- debug:
+    msg: "Current iteration is {{ current_iteration }} and is executing on {{ random_host }}"
+  run_once: yes
+
+- name: Stop service
+  service:
+    name: "{{ service_name }}"
+    state: stopped
+  delegate_to: "{{ random_host }}"
+  run_once: yes
+
+- name: Wait for interval
+  pause:
+    seconds: "{{ 1st_interval }}"
+  delegate_to: "{{ random_host }}"
+  run_once: yes
+
+- name: Start service
+  service:
+    name: "{{ service_name }}"
+    state: started
+  delegate_to: "{{ random_host }}"
+  run_once: yes
+
+# Perhaps wait_for file later on?
+- name: Wait for the service port to become available
+  wait_for:
+    host: "{{ random_host }}"
+    port: "{{ service_port }}"
+    delay: "{{ port_delay }}"
+    timeout: "{{ wait_for_timeout }}"
+  delegate_to: "{{ random_host }}"
+  run_once: yes
+
+- name: Wait for second defined interval.
+  pause:
+    seconds: "{{ 2nd_interval }}"
+  delegate_to: "{{ random_host }}"
+  run_once: yes

@@ -1,0 +1,9 @@
+---
+# defaults file for servcie restarter
+service_name: cassandra
+1st_interval: 60
+service_port: 9042
+2nd_interval: 60
+wait_for_timeout: 300
+max_iterations: 10
+port_delay: 10
