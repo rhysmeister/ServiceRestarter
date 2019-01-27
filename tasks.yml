@@ -14,8 +14,9 @@
   when: debug == True
 
 - name: Log message to file
-  local_action: shell "echo $(date '+%F %T %Z') {{ log_msg }} >> /tmp/service_restarter.log"
+  shell: "echo \"$(date '+%F %T %Z') - {{ log_msg }}\" >> /tmp/service_restarter.log"
   become: no
+  delegate_to: localhost
   run_once: yes
   when: logging == True
 
