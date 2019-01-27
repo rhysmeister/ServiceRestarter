@@ -1,7 +1,6 @@
 # ServiceRestarter
 Randomly selects a node from the supplied cluster and restarts a service on that host
 
-
 # Process overview
 
 The included tasks file will perform the following operations...
@@ -24,3 +23,6 @@ wait_for_timeout: How long we will wait for the service port to start responding
 2nd_interval: The 2nd wait interval after the service has been restarted and the port responds.x
 max_iterations: The maximum number of iterations.
 port_delay: How long to wait before listening for the service port after a restart.
+
+# Usage
+ansible-playbook -l cassandra -i inventory service_restarter.yml
