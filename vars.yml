@@ -7,3 +7,5 @@ service_port: 9042
 wait_for_timeout: 300
 max_iterations: 10
 port_delay: 10
+debug: True
+logging: True

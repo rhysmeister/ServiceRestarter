@@ -5,9 +5,18 @@
     random_host: "{{ play_hosts | random }}"
   run_once: yes
 
+- set_fact:
+    log_msg: "Current iteration is {{ current_iteration }} and is executing on {{ random_host }}"
+
 - debug:
     msg: "Current iteration is {{ current_iteration }} and is executing on {{ random_host }}"
   run_once: yes
+  when: debug == True
+
+- name: Log message to file
+  shell: echo "$(date '+%F %T %Z') Current iteration is {{ current_iteration }} and is executing on {{ random_host }} >> /tmp/service_restarter.log"
+  run_once: yes
+  when: logging == True
 
 - name: Stop service
   service:
